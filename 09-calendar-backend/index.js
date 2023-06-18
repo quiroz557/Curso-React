@@ -1,10 +1,14 @@
 const express = require('express');
-const dotenv = require('dotenv').config();
+const { dbConnection } = require('./database/config');
+const { cors } = require('cors');
+require('dotenv').config();
 
 
 // Crear el servidor de express
 
-const app = express();
+const app = express(); 
+
+dbConnection();
 
 
 //Directorio publico
@@ -15,6 +19,7 @@ app.use(express.json());
 
 //Rutas
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/events', require('./routes/events'));
 // TODO: CRUD: Eventos
 
 
