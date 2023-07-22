@@ -1,6 +1,6 @@
 const express = require('express');
 const { dbConnection } = require('./database/config');
-const { cors } = require('cors');
+const  cors  = require('cors');
 require('dotenv').config();
 
 
@@ -9,6 +9,9 @@ require('dotenv').config();
 const app = express(); 
 
 dbConnection();
+
+//CORS
+app.use(cors());
 
 
 //Directorio publico
@@ -22,6 +25,10 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'));
 // TODO: CRUD: Eventos
 
+
+app.get('*', (res) => { 
+    res.sendFile(__dirname + '/public/index.html');
+});
 
 // Escuchar peticiones
 app.listen(process.env.PORT, () => {

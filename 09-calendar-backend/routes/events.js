@@ -14,7 +14,7 @@ router.use(validarJWT);
 router.get('/', getEvents);
 
 //Crear un nuevo evento
-router.post('/createEvent', 
+router.post('/', 
     [
         check('title', 'El título es obligatorio').not().isEmpty(),
         check('start', 'Fecha de inicio es obligatoria').custom(isDate),
